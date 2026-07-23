@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Ontario Admissions Database — Preview</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/3.4.1/tailwind.min.js"></script>
+<style>body{font-family:system-ui,-apple-system,sans-serif;}</style>
+</head>
+<body class="bg-slate-950 text-white min-h-screen">
+
+<div id="home" class="view">
+  <section class="text-center py-20 px-4 bg-slate-900/40">
+    <span class="text-xs text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">Ontario University Admissions Database</span>
+    <h1 class="text-4xl font-bold mt-4">Real admissions data,<br/>from real applicants.</h1>
+    <p class="text-slate-400 mt-3 max-w-lg mx-auto">Browse verified acceptance decisions, averages, and extracurriculars across Ontario universities.</p>
+    <div class="max-w-md mx-auto mt-6">
+      <input placeholder="Search universities..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm outline-none focus:border-slate-500" />
+    </div>
+  </section>
+  <section class="max-w-4xl mx-auto grid grid-cols-2 gap-4 px-4 py-10">
+    <a onclick="show('uni')" class="cursor-pointer flex justify-between items-center bg-slate-900 border border-slate-800 rounded-lg p-4 hover:border-slate-600 transition">
+      <div><div class="font-medium">University of Waterloo</div><div class="text-slate-500 text-xs">Waterloo, Ontario</div></div>
+      <span class="text-slate-500 text-xs">6 decisions reported</span>
+    </a>
+    <div class="flex justify-between items-center bg-slate-900 border border-slate-800 rounded-lg p-4">
+      <div><div class="font-medium">Western University</div><div class="text-slate-500 text-xs">London, Ontario</div></div>
+      <span class="text-slate-500 text-xs">2 decisions reported</span>
+    </div>
+    <div class="flex justify-between items-center bg-slate-900 border border-slate-800 rounded-lg p-4">
+      <div><div class="font-medium">University of Toronto</div><div class="text-slate-500 text-xs">Toronto, Ontario</div></div>
+      <span class="text-slate-500 text-xs">7 decisions reported</span>
+    </div>
+    <div class="flex justify-between items-center bg-slate-900 border border-slate-800 rounded-lg p-4">
+      <div><div class="font-medium">University of Ottawa</div><div class="text-slate-500 text-xs">Ottawa, Ontario</div></div>
+      <span class="text-slate-500 text-xs">0 decisions reported</span>
+    </div>
+  </section>
+  <div class="max-w-3xl mx-auto text-center bg-slate-900 border border-slate-800 rounded-xl p-8 my-10">
+    <h3 class="font-bold text-lg">Got accepted? Pay it forward.</h3>
+    <p class="text-slate-400 text-sm mt-1">Share your decision to help future applicants.</p>
+    <button onclick="show('submit')" class="mt-4 bg-white text-slate-950 text-sm font-medium px-5 py-2 rounded-lg">Submit Your Result</button>
+  </div>
+</div>
+
+<div id="uni" class="view hidden">
+  <div class="bg-slate-900 p-8">
+    <a onclick="show('home')" class="cursor-pointer text-xs text-slate-500">← All universities</a>
+    <h1 class="text-2xl font-bold mt-2">University of Waterloo</h1>
+    <p class="text-slate-400 text-sm">Waterloo, Ontario</p>
+    <p class="text-slate-500 text-sm mt-2">World-renowned for co-op education and STEM programs.</p>
+  </div>
+  <div class="max-w-3xl mx-auto p-6">
+    <h2 class="text-sm text-slate-500 mb-3">Programs (3)</h2>
+    <div class="space-y-2">
+      <div class="flex justify-between items-center bg-slate-900 border border-slate-800 rounded-lg p-4"><div><div>Computer Science</div><div class="text-slate-500 text-xs">Faculty of Mathematics · BCS</div></div><span class="text-slate-500 text-xs">2 →</span></div>
+      <div class="flex justify-between items-center bg-slate-900 border border-slate-800 rounded-lg p-4"><div><div>Mechatronics Engineering</div><div class="text-slate-500 text-xs">Faculty of Engineering · BASc</div></div><span class="text-slate-500 text-xs">0 →</span></div>
+      <a onclick="show('program')" class="cursor-pointer flex justify-between items-center bg-slate-900 border border-slate-800 rounded-lg p-4 hover:border-slate-600"><div><div>Software Engineering</div><div class="text-slate-500 text-xs">Faculty of Engineering · BSE</div></div><span class="text-slate-500 text-xs">4 →</span></a>
+    </div>
+  </div>
+</div>
+
+<div id="program" class="view hidden">
+  <div class="bg-slate-900 p-8">
+    <a onclick="show('uni')" class="cursor-pointer text-xs text-slate-500">← University of Waterloo</a>
+    <h1 class="text-2xl font-bold mt-2">Software Engineering</h1>
+    <p class="text-slate-400 text-sm">University of Waterloo · Faculty of Engineering · BSE</p>
+  </div>
+  <div class="max-w-5xl mx-auto p-6 grid grid-cols-4 gap-3">
+    <div class="bg-slate-900 border border-slate-800 rounded-lg p-3"><div class="text-xl font-bold">50%</div><div class="text-xs text-slate-500">Acceptance rate</div></div>
+    <div class="bg-slate-900 border border-slate-800 rounded-lg p-3"><div class="text-xl font-bold">98.3%</div><div class="text-xs text-slate-500">Avg Accepted</div></div>
+    <div class="bg-slate-900 border border-slate-800 rounded-lg p-3"><div class="text-xl font-bold">4</div><div class="text-xs text-slate-500">Total Reports</div></div>
+    <div class="bg-slate-900 border border-slate-800 rounded-lg p-3"><div class="text-xl font-bold">2026</div><div class="text-xs text-slate-500">Year</div></div>
+  </div>
+  <div class="max-w-5xl mx-auto p-6 grid grid-cols-[240px_1fr] gap-6">
+    <aside class="bg-slate-900 border border-slate-800 rounded-lg p-4 h-fit space-y-4 text-sm">
+      <div><label class="text-xs text-slate-500">Average Range</label><input type="range" class="w-full"/><div class="flex justify-between text-xs text-slate-500"><span>0%</span><span>100%</span></div></div>
+      <div><label class="text-xs text-slate-500">Province</label><select class="w-full bg-slate-800 rounded px-2 py-1 mt-1"><option>All provinces</option></select></div>
+      <label class="flex justify-between items-center">Verified only<input type="checkbox"/></label>
+      <label class="flex justify-between items-center">Accepted only<input type="checkbox"/></label>
+    </aside>
+    <div class="space-y-3">
+      <div class="bg-slate-900 border border-slate-800 rounded-lg p-4">
+        <div class="flex justify-between items-start"><div class="flex items-center gap-2 text-xs text-slate-400"><span class="text-blue-400">✔ Verified</span><span>Ontario</span></div><span class="text-xs px-2 py-1 rounded bg-green-600">accepted</span></div>
+        <div class="grid grid-cols-3 gap-4 mt-3 text-sm"><div><div class="text-slate-500 text-xs">Average</div>97%</div><div><div class="text-slate-500 text-xs">Applied</div>Nov 2025</div><div><div class="text-slate-500 text-xs">Decision</div>Feb 2026</div></div>
+        <div class="mt-3 flex flex-wrap gap-1"><span class="text-xs bg-slate-800 rounded px-2 py-1">Robotics Club</span><span class="text-xs bg-slate-800 rounded px-2 py-1">Hackathon Lead</span></div>
+        <p class="mt-2 text-sm italic text-slate-400">"All was the deciding factor. Show your passion for projects."</p>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-lg p-4">
+        <div class="flex justify-between items-start"><div class="flex items-center gap-2 text-xs text-slate-400"><span>International</span></div><span class="text-xs px-2 py-1 rounded bg-red-600">rejected</span></div>
+        <div class="grid grid-cols-3 gap-4 mt-3 text-sm"><div><div class="text-slate-500 text-xs">Average</div>91%</div><div><div class="text-slate-500 text-xs">Applied</div>Dec 2025</div><div><div class="text-slate-500 text-xs">Decision</div>Mar 2026</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="submit" class="view hidden max-w-md mx-auto p-6">
+  <a onclick="show('home')" class="cursor-pointer text-xs text-slate-500">← Home</a>
+  <h1 class="text-xl font-bold mt-2 mb-1">Submit Your Result</h1>
+  <p class="text-slate-400 text-sm mb-6">Help future applicants by sharing your decision.</p>
+  <div class="space-y-3">
+    <input placeholder="Average %" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-sm"/>
+    <input placeholder="Province (leave blank if international)" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-sm"/>
+    <select class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-sm"><option>Accepted</option><option>Rejected</option><option>Waitlisted</option></select>
+    <textarea placeholder="Supplemental notes" class="w-full bg-slate-900 border border-slate-800 rounded px-3 py-2 text-sm"></textarea>
+    <button class="w-full bg-blue-600 rounded py-2 text-sm">Submit</button>
+  </div>
+</div>
+
+<nav class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-700 rounded-full px-2 py-1 flex gap-1 text-xs">
+  <button onclick="show('home')" class="px-3 py-1 rounded-full hover:bg-slate-800">Home</button>
+  <button onclick="show('uni')" class="px-3 py-1 rounded-full hover:bg-slate-800">University</button>
+  <button onclick="show('program')" class="px-3 py-1 rounded-full hover:bg-slate-800">Program</button>
+  <button onclick="show('submit')" class="px-3 py-1 rounded-full hover:bg-slate-800">Submit</button>
+</nav>
+
+<script>
+function show(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
