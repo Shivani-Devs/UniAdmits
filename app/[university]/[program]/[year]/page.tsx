@@ -5,12 +5,12 @@ import StickySubmitBox from '@/components/StickySubmitBox'
 export default async function ProgramPage({
   params,
 }: {
-  params: { university: string; program: string; year: string };
+  params: { university: string; program: string; year: string }
 }) {
   const { university, program, year } = params
   const supabase = await createClient()
 
-  // FIX: query by slug instead of ID
+  // Query program by slug
   const { data: programData } = await supabase
     .from('programs')
     .select('id, name, faculty, slug, universities(name)')
@@ -21,7 +21,7 @@ export default async function ProgramPage({
     return <main className="p-8">Program not found.</main>
   }
 
-  // FIX: use programData.id instead of URL param
+  // Query submissions for this program + year
   const { data: submissions } = await supabase
     .from('submissions')
     .select(`
