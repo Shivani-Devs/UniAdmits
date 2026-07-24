@@ -33,7 +33,7 @@ export default function ProgramListClient({
         {filtered.map((p: any) => (
           <Link
             key={p.id}
-            href={`/${university}/${p.id}/2026`}
+            href={`/${university}/${p.slug}/2026`}
             className="flex justify-between items-center bg-slate-900 border border-slate-800 rounded-lg p-4 hover:border-slate-600"
           >
             <div>
