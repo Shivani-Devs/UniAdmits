@@ -1,3 +1,7 @@
+import { createClient } from '@/lib/supabase/server'
+import ProgramCycleClient from '@/components/ProgramCycleClient'
+import StickySubmitBox from '@/components/StickySubmitBox'
+
 export default async function ProgramPage({
   params,
 }: {
@@ -6,6 +10,7 @@ export default async function ProgramPage({
   const { university, program, year } = params
   const supabase = await createClient()
 
+  // Fetch program by slug
   const { data: programData } = await supabase
     .from('programs')
     .select('id, name, faculty, slug, university_id')
@@ -16,12 +21,14 @@ export default async function ProgramPage({
     return <main className="p-8">Program not found.</main>
   }
 
+  // Fetch university separately (avoids join issues)
   const { data: uniData } = await supabase
     .from('universities')
     .select('name')
     .eq('id', programData.university_id)
     .single()
 
+  // Fetch submissions
   const { data: submissions } = await supabase
     .from('submissions')
     .select(`
