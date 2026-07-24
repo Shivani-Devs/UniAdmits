@@ -6,7 +6,7 @@ import StickySubmitBox from '@/components/StickySubmitBox'
 export default async function UniversityPage({
   params
 }: {
-  params: Promise<{ university: string }>
+  params: { university: string }
 }) {
   const { university } = await params
   const supabase = await createClient()
