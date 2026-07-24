@@ -1,7 +1,3 @@
-import { createClient } from '@/lib/supabase/server'
-import ProgramCycleClient from '@/components/ProgramCycleClient'
-import StickySubmitBox from '@/components/StickySubmitBox'
-
 export default async function ProgramPage({
   params,
 }: {
@@ -10,10 +6,9 @@ export default async function ProgramPage({
   const { university, program, year } = params
   const supabase = await createClient()
 
-  // Query program by slug
   const { data: programData } = await supabase
     .from('programs')
-    .select('id, name, faculty, slug, universities(name)')
+    .select('id, name, faculty, slug, university_id')
     .eq('slug', program)
     .single()
 
@@ -21,7 +16,12 @@ export default async function ProgramPage({
     return <main className="p-8">Program not found.</main>
   }
 
-  // Query submissions for this program + year
+  const { data: uniData } = await supabase
+    .from('universities')
+    .select('name')
+    .eq('id', programData.university_id)
+    .single()
+
   const { data: submissions } = await supabase
     .from('submissions')
     .select(`
@@ -54,9 +54,7 @@ export default async function ProgramPage({
         programData={{
           name: programData.name,
           faculty: programData.faculty,
-          universities: Array.isArray(programData.universities)
-            ? programData.universities[0]
-            : programData.universities
+          universities: uniData
         }}
       />
 
