@@ -1,4 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
+import ProgramCycleClient from '@/components/ProgramCycleClient'
+import StickySubmitBox from '@/components/StickySubmitBox'
 
 export default async function ProgramPage({
   params,
@@ -8,32 +10,59 @@ export default async function ProgramPage({
   const { university, program, year } = params
   const supabase = await createClient()
 
-  // Try fetching the program
-  const { data: programData, error: programError } = await supabase
+  const { data: programData } = await supabase
     .from('programs')
-    .select('*')
+    .select('id, name, faculty, slug, university_id')
     .eq('slug', program)
     .single()
 
+  if (!programData) {
+    return <main className="p-8">Program not found.</main>
+  }
+
+  const { data: uniData } = await supabase
+    .from('universities')
+    .select('name')
+    .eq('id', programData.university_id)
+    .single()
+
+  const { data: submissions } = await supabase
+    .from('submissions')
+    .select(`
+      id,
+      average,
+      province,
+      status,
+      verified,
+      cycle,
+      date_applied,
+      date_decision,
+      supplemental_notes,
+      extracurriculars (
+        id,
+        activity_name,
+        category,
+        position
+      )
+    `)
+    .eq('program_id', programData.id)
+    .eq('year', Number(year))
+    .order('created_at', { ascending: false })
+
   return (
-    <main className="p-8 space-y-4">
-      <h1 className="text-2xl font-bold">DEBUG MODE</h1>
+    <main className="relative">
+      <ProgramCycleClient
+        initialSubmissions={submissions ?? []}
+        university={university}
+        year={year}
+        programData={{
+          name: programData.name,
+          faculty: programData.faculty,
+          universities: uniData
+        }}
+      />
 
-      <div className="bg-slate-900 p-4 rounded">
-        <p><strong>URL university:</strong> {university}</p>
-        <p><strong>URL program:</strong> {program}</p>
-        <p><strong>URL year:</strong> {year}</p>
-      </div>
-
-      <div className="bg-slate-900 p-4 rounded">
-        <p><strong>Supabase programData:</strong></p>
-        <pre>{JSON.stringify(programData, null, 2)}</pre>
-      </div>
-
-      <div className="bg-slate-900 p-4 rounded">
-        <p><strong>Supabase programError:</strong></p>
-        <pre>{JSON.stringify(programError, null, 2)}</pre>
-      </div>
+      <StickySubmitBox />
     </main>
   )
 }
