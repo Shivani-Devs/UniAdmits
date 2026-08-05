@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function Navbar() {
   const supabase = createClient()
@@ -23,38 +24,42 @@ export default function Navbar() {
     router.refresh()
   }
 
-  useEffect(() => {
-  async function load() {
-    const { data } = await supabase.auth.getUser()
-    console.log("USER:", data.user)
-  }
-  load()
-}, [])
-
-
   return (
-    <nav className="w-full bg-slate-900 border-b bg-[#0b1629] border-slate-800 p-4 flex items-center justify-between">
-      <a href="/" className="text-white font-bold text-xl">
-        Ontario Admissions DB
-      </a>
+    <nav className="w-full bg-[#0b1629] border-b border-slate-800 p-4 flex items-center justify-between">
+      
+      {/* Logo */}
+      <Link href="/" className="text-white font-bold text-xl">
+        UniLore
+      </Link>
 
-      <div className="flex items-center gap-4">
+      {/* Right side links */}
+      <div className="flex items-center gap-6">
+
+        {/* UNIVERSITIES link */}
+        <Link 
+          href="/universities" 
+          className="text-slate-300 hover:text-white text-lg font-semibold"
+        >
+          Universities
+        </Link>
+
+        {/* Auth links */}
         {!user && (
           <>
-            <a href="/auth/login" className="text-slate-300 hover:text-white text-lg font-semibold">
+            <Link href="/auth/login" className="text-slate-300 hover:text-white text-lg font-semibold">
               Login
-            </a>
-            <a href="/auth/signup" className="text-slate-300 hover:text-white text-lg font-semibold">
+            </Link>
+            <Link href="/auth/signup" className="text-slate-300 hover:text-white text-lg font-semibold">
               Sign Up
-            </a>
+            </Link>
           </>
         )}
 
         {user && (
           <>
-            <a href="/profile" className="text-slate-300 hover:text-white text-lg font-semibold">
+            <Link href="/profile" className="text-slate-300 hover:text-white text-lg font-semibold">
               Dashboard
-            </a>
+            </Link>
             <button
               onClick={logout}
               className="text-slate-300 hover:text-white text-lg font-semibold"
@@ -66,6 +71,4 @@ export default function Navbar() {
       </div>
     </nav>
   )
-
-  
 }
