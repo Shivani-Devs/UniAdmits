@@ -56,6 +56,7 @@ export default function ProgramCycleClient({
         return submission.cycle === filters.cycle
       })()
 
+      
       const matchesAccepted = filters.accepted ? submission.status === 'accepted' : true
 
       return matchesAverage && matchesProvince && matchesCycle && matchesAccepted
