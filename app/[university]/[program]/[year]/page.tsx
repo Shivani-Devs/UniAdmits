@@ -31,7 +31,6 @@ export default async function ProgramPage(props: {
       average,
       province,
       status,
-      verified,
       cycle,
       date_applied,
       date_decision,
