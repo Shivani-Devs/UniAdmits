@@ -6,7 +6,6 @@ export type FilterState = {
   avg: [number, number]
   province: string
   cycle: string
-  verified: boolean
   accepted: boolean
 }
 
@@ -18,12 +17,11 @@ export default function Filters({ onChange }: FilterProps) {
   const [avg, setAvg] = useState<[number, number]>([50, 100])
   const [province, setProvince] = useState<string>('')
   const [cycle, setCycle] = useState<string>('')
-  const [verified, setVerified] = useState<boolean>(false)
   const [accepted, setAccepted] = useState<boolean>(false)
 
   useEffect(() => {
-    onChange({ avg, province, cycle, verified, accepted })
-  }, [accepted, avg, cycle, onChange, province, verified])
+    onChange({ avg, province, cycle, accepted })
+  }, [accepted, avg, cycle, onChange, province])
 
   return (
     <div className="space-y-6 bg-slate-900 p-6 rounded-lg border border-slate-800">
@@ -95,21 +93,6 @@ export default function Filters({ onChange }: FilterProps) {
         </select>
       </div>
 
-      {/* Verified */}
-      <div className="flex items-center gap-3 pt-2">
-        <input
-          type="checkbox"
-          id="verified"
-          checked={verified}
-          onChange={e => {
-            setVerified(e.target.checked)
-          }}
-          className="w-5 h-5 rounded"
-        />
-        <label htmlFor="verified" className="text-base text-slate-200 cursor-pointer">
-          Verified Only
-        </label>
-      </div>
 
       {/* Accepted */}
       <div className="flex items-center gap-3">
