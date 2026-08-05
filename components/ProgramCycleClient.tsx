@@ -10,7 +10,6 @@ type Submission = {
   average: number
   province: string | null
   status: 'accepted' | 'rejected' | 'waitlisted'
-  verified: boolean
   date_applied: string | null
   date_decision: string | null
   supplemental_notes: string | null
@@ -39,7 +38,6 @@ export default function ProgramCycleClient({
     avg: [50, 100],
     province: '',
     cycle: '',
-    verified: false,
     accepted: false
   })
 
@@ -58,10 +56,9 @@ export default function ProgramCycleClient({
         return submission.cycle === filters.cycle
       })()
 
-      const matchesVerified = filters.verified ? submission.verified : true
       const matchesAccepted = filters.accepted ? submission.status === 'accepted' : true
 
-      return matchesAverage && matchesProvince && matchesCycle && matchesVerified && matchesAccepted
+      return matchesAverage && matchesProvince && matchesCycle && matchesAccepted
     })
   }, [filters, initialSubmissions])
 
