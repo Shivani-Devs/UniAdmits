@@ -28,7 +28,7 @@ export default async function HomePage() {
           </h1>
 
           <p className="text-lg text-[#d1d6eb] mt-6 max-w-2xl mx-auto">
-            Browse verified acceptance decisions, averages, and extracurriculars across Ontario universities.
+            Browse acceptance decisions, averages, and extracurriculars across Ontario universities.
           </p>
 
           <div className="mt-10">
