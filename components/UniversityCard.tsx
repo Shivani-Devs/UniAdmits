@@ -33,7 +33,7 @@ export default function UniversityCard({ university }: { university: University 
       </div>
 
       <span className="text-[#1C3A6B] text-xs font-medium">
-        {count} reports
+        {count} programs
       </span>
     </Link>
   )
