@@ -2,12 +2,10 @@ import { createClient } from '@/lib/supabase/server'
 import ProgramCycleClient from '@/components/ProgramCycleClient'
 import StickySubmitBox from '@/components/StickySubmitBox'
 
-export default async function ProgramPage({
-  params,
-}: {
-  params: { university: string; program: string; year: string }
+export default async function ProgramPage(props: {
+  params: Promise<{ university: string; program: string; year: string }>
 }) {
-  const { university, program, year } = params
+  const { university, program, year } = await props.params
   const supabase = await createClient()
 
   const { data: programData } = await supabase
