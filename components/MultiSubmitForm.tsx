@@ -13,6 +13,7 @@ type UniDecision = {
   decisionYear: string
   decision: string
 }
+
 const MONTH_MAP: Record<string, string> = {
   January: '01',
   February: '02',
@@ -38,11 +39,13 @@ const YEARS = [2023, 2024, 2025, 2026, 2027]
 export default function MultiSubmitForm({
   userId,
   universities,
-  programs
+  programs,
+  year   // ⭐ URL YEAR — FIXED
 }: {
   userId: string
   universities: { id: string; name: string }[]
   programs: { id: string; name: string; university_id: string }[]
+  year: string
 }) {
   const supabase = createClient()
   const router = useRouter()
@@ -71,7 +74,6 @@ export default function MultiSubmitForm({
     const updated = [...uniDecisions]
     updated[index][field] = value
 
-    // Reset program if university changes
     if (field === 'university') {
       updated[index].program = ''
     }
@@ -116,7 +118,7 @@ export default function MultiSubmitForm({
         .insert({
           user_id: userId,
           program_id: uni.program,
-          year: cycle,
+          year: Number(year),   // ⭐ FIXED — ALWAYS USE URL YEAR
           average: Number(average),
           province: location,
           status: uni.decision,
