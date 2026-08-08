@@ -32,14 +32,31 @@ export default function SearchBar() {
         value={query}
         onChange={(e) => handleChange(e.target.value)}
         placeholder="Search universities..."
-          className="w-full px-4 py-3 rounded-lg bg-white text-[#1C3A6B] border border-[#2A4E8A] shadow-sm focus:ring-2 focus:ring-[#3D6BB3] focus:border-[#3D6BB3] outline-none transition"
-
+        className="
+          w-full px-4 py-3 rounded-lg bg-white
+          text-blue-700 placeholder-gray-400
+          border border-blue-800 shadow-sm
+          focus:ring-2 focus:ring-blue-600
+          focus:border-blue-600 outline-none transition
+        "
       />
+
       {results.length > 0 && (
-        <ul className="absolute w-full bg-[#ffffff] bg-slate-900 border border-slate-700 rounded-lg mt-1 z-10 overflow-hidden">
+        <ul className="
+          absolute w-full bg-white
+          border border-gray-300 rounded-lg mt-1
+          z-10 overflow-hidden shadow-md
+        ">
           {results.map((r) => (
             <li key={r.id}>
-              <Link href={`/${r.slug}`} className="block px-4 py-2 text-sm text-[#031147]hover:bg-slate-800">
+              <Link
+                href={`/${r.slug}`}
+                className="
+                  block px-4 py-2 text-sm
+                  text-blue-700
+                  hover:bg-blue-50 transition
+                "
+              >
                 {r.name}
               </Link>
             </li>
